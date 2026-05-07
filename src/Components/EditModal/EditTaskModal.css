@@ -167,3 +167,48 @@
     font-size: 20px;
   }
 }
+@media (max-width: 600px) {
+  .modal-container {
+    max-width: 80%;
+    border-radius: 14px;
+  }
+
+  .modal-header {
+    padding: 14px 16px;
+  }
+
+  .modal-header h2 {
+    font-size: 16px;
+  }
+
+  .close-btn {
+    font-size: 18px;
+  }
+
+  .modal-body {
+    padding: 14px 16px;
+    gap: 14px;
+  }
+
+  .modal-body input,
+  .modal-body textarea,
+  .modal-body select {
+    padding: 10px 12px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  .modal-body textarea {
+    min-height: 90px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+  }
+
+  .update-btn {
+    padding: 11px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+}

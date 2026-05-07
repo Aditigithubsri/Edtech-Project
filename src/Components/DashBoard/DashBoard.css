@@ -11,38 +11,6 @@
   overflow-x: auto;
 }
 
-/* HEADER */
-
-.dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.dashboard-header h1 {
-  font-size: 32px;
-  margin: 0;
-  font-weight: 700;
-}
-
-.logout-btn {
-  padding: 12px 22px;
-  border: none;
-  border-radius: 12px;
-  background: #ef4444;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.logout-btn:hover {
-  background: #dc2626;
-  transform: translateY(-2px);
-}
 
 /* FORM */
 
@@ -372,46 +340,14 @@
     opacity: 0.5;
   }
 }
-
-/* RESPONSIVE */
-
 @media (max-width: 768px) {
   .dashboard {
-    padding: 20px;
-  }
+  padding: 10px;
+}
+.filter-buttons button {
+  padding: 7px 20px;
+  font-size: 12px;
+}
 
-  .dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 
-  .dashboard-header h1 {
-    font-size: 24px;
-  }
-
-  .top-bar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .search-input {
-    width: 100%;
-  }
-
-  .board-column {
-    min-width: 300px;
-    max-width: 300px;
-  }
-
-  .task-form {
-    grid-template-columns: 1fr;
-  }
-
-  .task-footer {
-    flex-direction: column;
-  }
-
-  .task-footer button {
-    width: 100%;
-  }
 }

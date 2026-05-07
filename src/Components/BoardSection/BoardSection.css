@@ -424,3 +424,64 @@
     width: 100%;
   }
 }
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .board-column {
+    min-width: 200px;
+  }
+
+  /* SMALLER CARD */
+  .task-card {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  /* SMALLER TITLE */
+  .task-top h3 {
+    font-size: 13px;
+  }
+
+  /* SMALLER STATUS BADGE */
+  .task-status {
+    font-size: 9px;
+    padding: 3px 7px;
+  }
+
+  /* SMALLER DESCRIPTION */
+  .task-card p {
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+
+  /* SMALLER DROPDOWN */
+  .move-task {
+    margin-bottom: 10px;
+  }
+
+  .move-task select {
+    padding: 7px;
+    font-size: 12px;
+  }
+
+  /* SMALLER BUTTONS */
+  .task-footer {
+    flex-direction: column;
+  }
+
+  .task-footer button {
+    width: 100%;
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  /* SMALLER COLUMN HEADER */
+  .column-header h2 {
+    font-size: 16px;
+  }
+
+  .column-header span {
+    font-size: 12px;
+    padding: 4px 9px;
+  }
+}
