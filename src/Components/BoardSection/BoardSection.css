@@ -1,0 +1,164 @@
+.board-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+
+.board-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.board-container::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 20px;
+}
+
+.board-column {
+  min-width: 350px;
+  background: #1e293b;
+  border-radius: 16px;
+  padding: 15px;
+  height: fit-content;
+  flex-shrink: 0;
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.column-header h2 {
+  font-size: 22px;
+  margin: 0;
+  color: white;
+}
+
+.column-header span {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+}
+
+.column-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task-card {
+  background: white;
+  color: #111827;
+  border-radius: 14px;
+  padding: 16px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.task-card:hover {
+  transform: translateY(-3px);
+}
+
+.task-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.task-top h3 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.task-status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  color: white;
+  background: #3b82f6;
+  white-space: nowrap;
+}
+
+.task-card p {
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.move-task {
+  margin-bottom: 15px;
+}
+
+.move-task select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  font-size: 14px;
+}
+
+.task-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.task-footer button {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.edit-btn {
+  background: #0f766e;
+}
+
+.edit-btn:hover {
+  background: #115e59;
+}
+
+.delete-btn {
+  background: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #b91c1c;
+}
+
+.empty-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .board-column {
+    min-width: 300px;
+  }
+
+  .task-footer {
+    flex-direction: column;
+  }
+
+  .task-footer button {
+    width: 100%;
+  }
+}
