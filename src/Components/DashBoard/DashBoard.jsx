@@ -1,9 +1,16 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
 import "./DashBoard.css";
-import Pagination from "../Pagination/Pagination";
+
 import Data from "./Data";
+
 import EditTaskModal from "../EditModal/EditTaskModal";
 import DeleteTaskModal from "../DeleteTaskModal/DeleteTaskModal";
+
 import Header from "../Header/Header";
 import BoardSection from "../BoardSection/BoardSection";
 
@@ -17,23 +24,36 @@ const DashBoard = () => {
     "Done",
   ];
 
-  const [tasks, setTasks] = useState(Data);
+  /* TASKS */
 
-  const [title, setTitle] = useState("");
+  const [tasks, setTasks] =
+    useState(Data);
+
+  /* ADD TASK */
+
+  const [title, setTitle] =
+    useState("");
+
   const [description, setDescription] =
     useState("");
+
   const [taskStatus, setTaskStatus] =
-    useState("To Do");
+    useState("");
 
-  const [filter, setFilter] = useState("All");
-  const [search, setSearch] = useState("");
+  /* FILTERS */
 
-  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] =
+    useState("All");
 
-  const [currentPage, setCurrentPage] =
-    useState(1);
+  const [search, setSearch] =
+    useState("");
 
-  /* EDIT MODAL STATES */
+  /* LOADING */
+
+  const [loading, setLoading] =
+    useState(true);
+
+  /* EDIT MODAL */
 
   const [isModalOpen, setIsModalOpen] =
     useState(false);
@@ -41,7 +61,7 @@ const DashBoard = () => {
   const [selectedTask, setSelectedTask] =
     useState(null);
 
-  /* DELETE MODAL STATES */
+  /* DELETE MODAL */
 
   const [
     isDeleteModalOpen,
@@ -53,7 +73,7 @@ const DashBoard = () => {
     setSelectedDeleteTask,
   ] = useState(null);
 
-  const tasksPerPage = 6;
+  /* LOADER */
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -85,34 +105,34 @@ const DashBoard = () => {
 
     setTitle("");
     setDescription("");
-    setTaskStatus("To Do");
+    setTaskStatus("");
   };
 
-  /* OPEN DELETE MODAL */
+  /* MOVE TASK */
 
-  const openDeleteModal = (task) => {
-    setSelectedDeleteTask(task);
-    setIsDeleteModalOpen(true);
-  };
-
-  /* DELETE TASK */
-
-  const handleDelete = (id) => {
+  const handleMoveTask = (
+    id,
+    status
+  ) => {
     setTasks((prev) =>
-      prev.filter((task) => task.id !== id)
+      prev.map((task) =>
+        task.id === id
+          ? { ...task, status }
+          : task
+      )
     );
   };
 
-  /* OPEN EDIT MODAL */
+  /* EDIT TASK */
 
   const handleEdit = (task) => {
     setSelectedTask(task);
     setIsModalOpen(true);
   };
 
-  /* UPDATE TASK */
-
-  const handleUpdateTask = (updatedTask) => {
+  const handleUpdateTask = (
+    updatedTask
+  ) => {
     setTasks((prev) =>
       prev.map((task) =>
         task.id === updatedTask.id
@@ -122,14 +142,17 @@ const DashBoard = () => {
     );
   };
 
-  /* MOVE TASK */
+  /* DELETE TASK */
 
-  const handleMoveTask = (id, status) => {
+  const openDeleteModal = (task) => {
+    setSelectedDeleteTask(task);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleDelete = (id) => {
     setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id
-          ? { ...task, status }
-          : task
+      prev.filter(
+        (task) => task.id !== id
       )
     );
   };
@@ -146,85 +169,27 @@ const DashBoard = () => {
       const matchesSearch =
         task.title
           .toLowerCase()
-          .includes(search.toLowerCase()) ||
+          .includes(
+            search.toLowerCase()
+          ) ||
         task.description
           .toLowerCase()
-          .includes(search.toLowerCase());
+          .includes(
+            search.toLowerCase()
+          );
 
-      return matchesFilter && matchesSearch;
+      return (
+        matchesFilter &&
+        matchesSearch
+      );
     });
   }, [tasks, filter, search]);
-
-  /* PAGINATION */
-
-  const indexOfLastTask =
-    currentPage * tasksPerPage;
-
-  const indexOfFirstTask =
-    indexOfLastTask - tasksPerPage;
-
-  const paginatedTasks =
-    filteredTasks.slice(
-      indexOfFirstTask,
-      indexOfLastTask
-    );
-
-  const totalPages = Math.ceil(
-    filteredTasks.length / tasksPerPage
-  );
 
   return (
     <div className="dashboard">
       {/* HEADER */}
 
       <Header />
-
-      {/* FORM */}
-
-      <div className="task-form-container">
-        <h2>Create Task</h2>
-
-        <div className="task-form">
-          <input
-            type="text"
-            placeholder="Task Title"
-            value={title}
-            onChange={(e) =>
-              setTitle(e.target.value)
-            }
-          />
-
-          <input
-            type="text"
-            placeholder="Task Description"
-            value={description}
-            onChange={(e) =>
-              setDescription(e.target.value)
-            }
-          />
-
-          <select
-            value={taskStatus}
-            onChange={(e) =>
-              setTaskStatus(e.target.value)
-            }
-            className="status-select"
-          >
-            {boardColumns.map((item) => (
-              <option
-                key={item}
-                value={item}
-              >
-                {item}
-              </option>
-            ))}
-          </select>
-
-          <button onClick={handleSubmit}>
-            Add Task
-          </button>
-        </div>
-      </div>
 
       {/* SEARCH + FILTER */}
 
@@ -246,10 +211,9 @@ const DashBoard = () => {
                 ? "active"
                 : ""
             }
-            onClick={() => {
-              setFilter("All");
-              setCurrentPage(1);
-            }}
+            onClick={() =>
+              setFilter("All")
+            }
           >
             All
           </button>
@@ -262,10 +226,9 @@ const DashBoard = () => {
                   ? "active"
                   : ""
               }
-              onClick={() => {
-                setFilter(item);
-                setCurrentPage(1);
-              }}
+              onClick={() =>
+                setFilter(item)
+              }
             >
               {item}
             </button>
@@ -285,25 +248,45 @@ const DashBoard = () => {
           ))}
         </div>
       ) : (
-        <>
-          {/* BOARD SECTION */}
+        <BoardSection
+          boardColumns={boardColumns}
+          paginatedTasks={
+            filteredTasks
+          }
+          filter={filter}
+          handleMoveTask={
+            handleMoveTask
+          }
+          handleEdit={handleEdit}
+          openDeleteModal={
+            openDeleteModal
+          }
 
-          <BoardSection
-            boardColumns={boardColumns}
-            paginatedTasks={paginatedTasks}
-            filter={filter}
-            handleMoveTask={handleMoveTask}
-            handleEdit={handleEdit}
-            openDeleteModal={openDeleteModal}
-          />
-        </>
+          /* ADD TASK */
+
+          handleSubmit={
+            handleSubmit
+          }
+          title={title}
+          setTitle={setTitle}
+          description={description}
+          setDescription={
+            setDescription
+          }
+          taskStatus={taskStatus}
+          setTaskStatus={
+            setTaskStatus
+          }
+        />
       )}
 
       {/* EDIT MODAL */}
 
       <EditTaskModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() =>
+          setIsModalOpen(false)
+        }
         task={selectedTask}
         onUpdate={handleUpdateTask}
         boardColumns={boardColumns}

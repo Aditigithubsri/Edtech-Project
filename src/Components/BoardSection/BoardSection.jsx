@@ -1,4 +1,7 @@
 import React from "react";
+
+import { RxCross2 } from "react-icons/rx";
+
 import "./BoardSection.css";
 
 const BoardSection = ({
@@ -8,6 +11,16 @@ const BoardSection = ({
   handleMoveTask,
   handleEdit,
   openDeleteModal,
+
+  /* ADD TASK */
+
+  handleSubmit,
+  title,
+  setTitle,
+  description,
+  setDescription,
+  taskStatus,
+  setTaskStatus,
 }) => {
   return (
     <div className="board-container">
@@ -30,6 +43,8 @@ const BoardSection = ({
             className="board-column"
             key={column}
           >
+            {/* HEADER */}
+
             <div className="column-header">
               <h2>{column}</h2>
 
@@ -37,6 +52,8 @@ const BoardSection = ({
                 {columnTasks.length}
               </span>
             </div>
+
+            {/* TASKS */}
 
             <div className="column-cards">
               {columnTasks.length > 0 ? (
@@ -56,6 +73,8 @@ const BoardSection = ({
                     <p>
                       {task.description}
                     </p>
+
+                    {/* MOVE TASK */}
 
                     <div className="move-task">
                       <select
@@ -79,6 +98,8 @@ const BoardSection = ({
                         )}
                       </select>
                     </div>
+
+                    {/* ACTIONS */}
 
                     <div className="task-footer">
                       <button
@@ -106,6 +127,81 @@ const BoardSection = ({
               ) : (
                 <div className="empty-card">
                   No Tasks
+                </div>
+              )}
+            </div>
+
+            {/* ADD CARD */}
+
+            <div className="add-card-section">
+              {taskStatus !== column ? (
+                <button
+                  className="add-card-btn"
+                  onClick={() =>
+                    setTaskStatus(column)
+                  }
+                >
+                  + Add Card
+                </button>
+              ) : (
+                <div className="add-card-form">
+                  {/* FORM HEADER */}
+
+                  <div className="form-header">
+                    <span>
+                      Add New Card
+                    </span>
+
+                    <button
+                      className="close-form-btn"
+                      onClick={() => {
+                        setTaskStatus(
+                          ""
+                        );
+
+                        setTitle("");
+
+                        setDescription(
+                          ""
+                        );
+                      }}
+                    >
+                      <RxCross2 size={18} />
+                    </button>
+                  </div>
+
+                  {/* TITLE */}
+
+                  <input
+                    type="text"
+                    placeholder="Task title"
+                    value={title}
+                    onChange={(e) =>
+                      setTitle(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  {/* DESCRIPTION */}
+
+                  <textarea
+                    placeholder="Description"
+                    value={description}
+                    onChange={(e) =>
+                      setDescription(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  {/* BUTTON */}
+
+                  <button
+                    onClick={handleSubmit}
+                  >
+                    Create Task
+                  </button>
                 </div>
               )}
             </div>

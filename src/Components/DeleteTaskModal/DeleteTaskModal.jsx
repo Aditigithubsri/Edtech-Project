@@ -6,6 +6,14 @@ const DeleteTaskModal = ({
   onClose,
   onConfirm,
   task,
+
+  /* CUSTOM PROPS */
+
+  title = "Delete Task",
+  message = "Are you sure you want to delete this task?",
+  confirmText = "Yes",
+  cancelText = "No",
+  showTaskInfo = true,
 }) => {
   if (!isOpen) return null;
 
@@ -13,37 +21,36 @@ const DeleteTaskModal = ({
     <div className="delete-modal-overlay">
       <div className="delete-modal-container">
         <div className="delete-modal-header">
-          <h2>Delete Task</h2>
+          <h2>{title}</h2>
         </div>
 
         <div className="delete-modal-body">
-          <p>
-            Are you sure you want to delete
-            this task?
-          </p>
+          <p>{message}</p>
 
-          <div className="delete-task-info">
-            <h3>{task?.title}</h3>
+          {showTaskInfo && (
+            <div className="delete-task-info">
+              <h3>{task?.title}</h3>
 
-            <span>{task?.status}</span>
-          </div>
+              <span>{task?.status}</span>
+            </div>
+          )}
 
           <div className="delete-modal-actions">
             <button
               className="cancel-btn"
               onClick={onClose}
             >
-              No
+              {cancelText}
             </button>
 
             <button
               className="confirm-delete-btn"
               onClick={() => {
-                onConfirm(task.id);
+                onConfirm(task?.id);
                 onClose();
               }}
             >
-              Yes
+              {confirmText}
             </button>
           </div>
         </div>

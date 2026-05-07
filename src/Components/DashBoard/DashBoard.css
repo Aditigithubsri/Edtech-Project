@@ -5,7 +5,7 @@
     #0f172a,
     #111827
   );
-  padding: 30px;
+  padding: 20px;
   color: white;
   font-family: Arial, sans-serif;
   overflow-x: auto;
@@ -65,7 +65,7 @@
     auto-fit,
     minmax(220px, 1fr)
   );
-  gap: 15px;
+  gap: 35px;
 }
 
 .task-form input,

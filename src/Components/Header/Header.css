@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 30px;
+  padding: 18px 0px 18px 10px;
   background: #020817;
   border-bottom: 1px solid #1e293b;
   position: relative;
@@ -40,7 +40,7 @@
 
 .profile-wrapper {
   position: relative;
-  padding-right: 10px;
+  padding-right: 30px;
 }
 
 .profile-img {
