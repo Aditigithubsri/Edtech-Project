@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./EditTaskModal.css";
+import { toast } from "react-toastify";
 
 const EditTaskModal = ({
   isOpen,
@@ -23,12 +24,11 @@ const EditTaskModal = ({
   }, [task]);
 
   if (!isOpen) return null;
-
-  const handleSubmit = () => {
-    if (!title || !description) {
-      alert("Please fill all fields");
-      return;
-    }
+const handleSubmit = () => {
+  if (!title.trim() || !description.trim()) {
+    toast.error("Fields cannot be empty");
+    return;
+  }
 
     onUpdate({
       ...task,

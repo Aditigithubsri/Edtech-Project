@@ -2,6 +2,8 @@ import React from "react";
 
 import { RxCross2 } from "react-icons/rx";
 
+import { toast } from "react-toastify";
+
 import "./BoardSection.css";
 
 const BoardSection = ({
@@ -22,6 +24,24 @@ const BoardSection = ({
   taskStatus,
   setTaskStatus,
 }) => {
+
+  const validateAndSubmit = () => {
+
+    if (!title.trim()) {
+      toast.error("Title is required");
+      return;
+    }
+
+    // if (!description.trim()) {
+    //   toast.error(
+    //     "Description is required"
+    //   );
+    //   return;
+    // }
+
+    handleSubmit();
+  };
+
   return (
     <div className="board-container">
       {boardColumns.map((column) => {
@@ -198,7 +218,9 @@ const BoardSection = ({
                   {/* BUTTON */}
 
                   <button
-                    onClick={handleSubmit}
+                    onClick={
+                      validateAndSubmit
+                    }
                   >
                     Create Task
                   </button>

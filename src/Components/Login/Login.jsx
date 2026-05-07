@@ -7,6 +7,7 @@ import {
 } from "react-icons/ai";
 
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -29,17 +30,60 @@ const Login = () => {
   const handleSubmit = () => {
     setError("");
 
-    if (
-      !email ||
-      !password ||
-      (!isLogin && !name)
-    ) {
-      setError("Please fill all fields");
+    // NAME VALIDATION FOR REGISTER
+    if (!isLogin) {
+      if (!name.trim()) {
+        setError("Name is required");
+        return;
+      }
+
+      // NAME SPECIAL CHARACTER VALIDATION
+      const nameRegex =
+        /^[A-Za-z\s]+$/;
+
+      if (!nameRegex.test(name)) {
+        setError(
+          "Name should not contain special characters"
+        );
+        return;
+      }
+    }
+
+    // EMAIL EMPTY VALIDATION
+    if (!email.trim()) {
+      setError("Email is required");
+      return;
+    }
+
+    // PASSWORD EMPTY VALIDATION
+    if (!password.trim()) {
+      setError("Password is required");
+      return;
+    }
+
+    // EMAIL VALIDATION
+    const emailRegex =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      setError(
+        "Please enter a valid email"
+      );
+      return;
+    }
+
+    // PASSWORD LENGTH VALIDATION
+    if (password.length < 8) {
+      setError(
+        "Password must be at least 8 characters"
+      );
       return;
     }
 
     const userData = {
-      name: isLogin ? email.split("@")[0] : name,
+      name: isLogin
+        ? email.split("@")[0]
+        : name,
       email,
     };
 
@@ -50,9 +94,9 @@ const Login = () => {
     );
 
     if (isLogin) {
-      alert("Login Successful");
+      toast.success("Login Successful");
     } else {
-      alert("Registration Successful");
+      toast.success("Registration Successful");
     }
 
     navigate("/dashboard");

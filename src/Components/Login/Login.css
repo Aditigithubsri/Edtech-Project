@@ -113,7 +113,7 @@
 }
 
 .paraText:hover {
-  color: red;
+ text-decoration: underline;
 }
 
 .arrowIcon {

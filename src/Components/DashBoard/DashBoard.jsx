@@ -13,6 +13,7 @@ import DeleteTaskModal from "../DeleteTaskModal/DeleteTaskModal";
 
 import Header from "../Header/Header";
 import BoardSection from "../BoardSection/BoardSection";
+import { toast } from "react-toastify";
 
 const DashBoard = () => {
   const boardColumns = [
@@ -87,7 +88,7 @@ const DashBoard = () => {
 
   const handleSubmit = () => {
     if (!title || !description) {
-      alert("Please fill all fields");
+      toast.error("Please fill all the fields");
       return;
     }
 

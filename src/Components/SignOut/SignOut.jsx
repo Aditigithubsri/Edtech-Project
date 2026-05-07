@@ -5,7 +5,7 @@ const Signout = () => {
   const [open, setOpen] = useState(false);
 
   const handleSignOut = () => {
-    alert("Signed Out");
+    toast.success("Successfully Signed Out");
   };
 
   return (
