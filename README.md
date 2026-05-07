@@ -1,18 +1,68 @@
-# React + Vite
+# 🧠 Task Management Dashboard (React + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern **task management web application** built using **React + Vite+ Javascript**, where users can create, update, delete, and organize tasks in a Kanban-style dashboard.
 
-Currently, two official plugins are available:
+It includes authentication (login/register), toast notifications, modal-based editing, and drag-like status movement system.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### 🔐 Authentication
+- Login / Register system
+- Form validation (email, password, name rules)
+- LocalStorage-based user session
+- Redirect to dashboard after login
 
-Note: This will impact Vite dev & build performances.
 
-## Expanding the ESLint configuration
+### 📊 Task Dashboard
+- Trello-style board layout
+- Multiple task columns:
+  - To Do
+  - Doing
+  - Blocked
+  - Code Review
+  - QA
+  - Done
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+### 📝 Task Management
+- ➕ Add new task (with validation)
+- ✏️ Edit existing task (modal)
+- ❌ Delete task (confirmation modal)
+- 🔄 Move tasks between columns
+- 📌 Task status tracking
+
+
+### 🔍 Search & Filter
+- Search tasks by title or description
+- Filter tasks by status (column-wise)
+
+
+### 🎨 UI/UX Features
+- Responsive dashboard layout
+- Modal-based editing system
+- Toast notifications for alerts
+- Clean Kanban board design
+- Loading skeleton UI
+
+
+## 🧰 Tech Stack
+
+- React (Vite)
+- React Router DOM
+- React Toastify (notifications)
+- React Icons
+- Styled Components / CSS
+- LocalStorage (for persistence)
+- Javascript
+
+
+## 📦 Installation
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/Aditigithubsri/Edtech-Project.git
+
+### 2. start Project
+npm install
+npm start

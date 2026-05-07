@@ -15,7 +15,6 @@ const BoardSection = ({
   openDeleteModal,
 
   /* ADD TASK */
-
   handleSubmit,
   title,
   setTitle,
@@ -26,35 +25,43 @@ const BoardSection = ({
 }) => {
 
   const validateAndSubmit = () => {
-
     if (!title.trim()) {
       toast.error("Title is required");
       return;
     }
 
-    // if (!description.trim()) {
-    //   toast.error(
-    //     "Description is required"
-    //   );
-    //   return;
-    // }
-
     handleSubmit();
+  };
+
+  /* DRAG START */
+  const handleDragStart = (e, id) => {
+    e.dataTransfer.setData("taskId", id);
+  };
+
+  /* DRAG OVER */
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  /* DROP (FIXED) */
+  const handleDrop = (e, column) => {
+    e.preventDefault();
+
+    const taskId = Number(
+      e.dataTransfer.getData("taskId")
+    );
+
+    handleMoveTask(taskId, column);
   };
 
   return (
     <div className="board-container">
       {boardColumns.map((column) => {
-        const columnTasks =
-          paginatedTasks.filter(
-            (task) =>
-              task.status === column
-          );
+        const columnTasks = paginatedTasks.filter(
+          (task) => task.status === column
+        );
 
-        if (
-          filter !== "All" &&
-          filter !== column
-        ) {
+        if (filter !== "All" && filter !== column) {
           return null;
         }
 
@@ -62,25 +69,26 @@ const BoardSection = ({
           <div
             className="board-column"
             key={column}
+            onDragOver={handleDragOver}
+            onDrop={(e) => handleDrop(e, column)}
           >
             {/* HEADER */}
-
             <div className="column-header">
               <h2>{column}</h2>
-
-              <span>
-                {columnTasks.length}
-              </span>
+              <span>{columnTasks.length}</span>
             </div>
 
             {/* TASKS */}
-
             <div className="column-cards">
               {columnTasks.length > 0 ? (
                 columnTasks.map((task) => (
                   <div
                     className="task-card"
                     key={task.id}
+                    draggable
+                    onDragStart={(e) =>
+                      handleDragStart(e, task.id)
+                    }
                   >
                     <div className="task-top">
                       <h3>{task.title}</h3>
@@ -90,12 +98,9 @@ const BoardSection = ({
                       </span>
                     </div>
 
-                    <p>
-                      {task.description}
-                    </p>
+                    <p>{task.description}</p>
 
                     {/* MOVE TASK */}
-
                     <div className="move-task">
                       <select
                         value={task.status}
@@ -106,27 +111,19 @@ const BoardSection = ({
                           )
                         }
                       >
-                        {boardColumns.map(
-                          (item) => (
-                            <option
-                              key={item}
-                              value={item}
-                            >
-                              {item}
-                            </option>
-                          )
-                        )}
+                        {boardColumns.map((item) => (
+                          <option key={item} value={item}>
+                            {item}
+                          </option>
+                        ))}
                       </select>
                     </div>
 
                     {/* ACTIONS */}
-
                     <div className="task-footer">
                       <button
                         className="edit-btn"
-                        onClick={() =>
-                          handleEdit(task)
-                        }
+                        onClick={() => handleEdit(task)}
                       >
                         Edit
                       </button>
@@ -134,9 +131,7 @@ const BoardSection = ({
                       <button
                         className="delete-btn"
                         onClick={() =>
-                          openDeleteModal(
-                            task
-                          )
+                          openDeleteModal(task)
                         }
                       >
                         Delete
@@ -152,38 +147,26 @@ const BoardSection = ({
             </div>
 
             {/* ADD CARD */}
-
             <div className="add-card-section">
               {taskStatus !== column ? (
                 <button
                   className="add-card-btn"
-                  onClick={() =>
-                    setTaskStatus(column)
-                  }
+                  onClick={() => setTaskStatus(column)}
                 >
                   + Add Card
                 </button>
               ) : (
                 <div className="add-card-form">
                   {/* FORM HEADER */}
-
                   <div className="form-header">
-                    <span>
-                      Add New Card
-                    </span>
+                    <span>Add New Card</span>
 
                     <button
                       className="close-form-btn"
                       onClick={() => {
-                        setTaskStatus(
-                          ""
-                        );
-
+                        setTaskStatus("");
                         setTitle("");
-
-                        setDescription(
-                          ""
-                        );
+                        setDescription("");
                       }}
                     >
                       <RxCross2 size={18} />
@@ -191,37 +174,26 @@ const BoardSection = ({
                   </div>
 
                   {/* TITLE */}
-
                   <input
                     type="text"
                     placeholder="Task title"
                     value={title}
                     onChange={(e) =>
-                      setTitle(
-                        e.target.value
-                      )
+                      setTitle(e.target.value)
                     }
                   />
 
                   {/* DESCRIPTION */}
-
                   <textarea
                     placeholder="Description"
                     value={description}
                     onChange={(e) =>
-                      setDescription(
-                        e.target.value
-                      )
+                      setDescription(e.target.value)
                     }
                   />
 
                   {/* BUTTON */}
-
-                  <button
-                    onClick={
-                      validateAndSubmit
-                    }
-                  >
+                  <button onClick={validateAndSubmit}>
                     Create Task
                   </button>
                 </div>
