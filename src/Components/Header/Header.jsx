@@ -33,11 +33,10 @@ const Header = () => {
     }
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("taskUser");
-
-    navigate("/");
-  };
+ const handleLogout = () => {
+  localStorage.removeItem("taskUser");
+  navigate("/login", { replace: true }); // replace: true kills the history entry
+};
 
   return (
     <>

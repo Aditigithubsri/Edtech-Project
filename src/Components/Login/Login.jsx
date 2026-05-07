@@ -99,7 +99,7 @@ const Login = () => {
       toast.success("Registration Successful");
     }
 
-    navigate("/dashboard");
+    navigate("/dashboard", { replace: true });
 
     setName("");
     setEmail("");
